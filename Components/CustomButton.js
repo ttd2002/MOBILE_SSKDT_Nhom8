@@ -1,11 +1,11 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 
-const CustomButton = () => {
+const CustomButton = ({onPress, text}) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.input}>Đăng nhập</Text>
-        </View>
+        <Pressable onPress={onPress} style={styles.container}>
+            <Text style={styles.input}>{text}</Text>
+        </Pressable>
     )
 }
 const styles = StyleSheet.create({
@@ -14,8 +14,9 @@ const styles = StyleSheet.create({
         padding: 14,
         marginVertical: 5,
         borderRadius: 80,
-        backgroundImage: 'linear-gradient(to right, #3390fb, #55bbfb)',
-        alignItems: 'center'
+        backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
+        alignItems: 'center',
+        
     },
     input: {
         fontSize: '20px',
