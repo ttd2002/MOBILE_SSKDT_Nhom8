@@ -9,23 +9,12 @@ function Screen_Register() {
     const [password, setpassword] = useState('');
 
     const onPressRegister = () => {
-        console.log('Register');
+        alert('Register');
     }
 
 
     return (
         <View style={styles.container}>
-            
-            <View style={styles.logo_area}>
-            
-                <View style={styles.logo_banner}>
-                    <Image style={styles.logo_style} source={require('../images/logo.png')} />
-                    <View>
-                        <Text style={styles.logo_banner_text_1}>SSKĐT</Text>
-                        <Text style={styles.logo_banner_text_2}>Sổ sức khỏe điện tử</Text>
-                    </View>
-                </View>
-            </View>
             <View style={styles.Register_area}>
                 <View style={styles.Register_label}>
                     <Text style={styles.label_text}>Đăng ký</Text>
@@ -58,64 +47,40 @@ export default Screen_Register;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
+        backgroundColor: '#2b83f9',
+        //backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
         alignItems: 'center',
         justifyContent: 'center',
 
-    },
-    
-    logo_area: {
-        width: '100%',
-        height: '30%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    logo_banner: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    logo_style: {
-        width: '100px',
-        height: '100px'
-    },
-    logo_banner_text_1: {
-        color: 'white',
-        fontSize: '45px',
-        fontWeight: '500',
-    },
-    logo_banner_text_2: {
-        color: 'white',
-        fontSize: '15px',
-        fontWeight: '350',
     },
     Register_area: {
 
         backgroundColor: '#f1f9ff',
         width: '100%',
-        height: '80%',
-        marginBottom: '-50px',
-        borderRadius: '35px',
+        height: '110%',
+        marginBottom: -50,
+        borderRadius: 35,
         alignItems: 'center',
 
     },
     Register_label: {
 
-        marginVertical: '25px'
+        marginVertical: 25,
 
     },
     label_text: {
         fontWeight: 'bold',
-        fontSize: '17px'
+        fontSize: 17
     },
     input_area: {
         width: '80%'
     },
     Text_Style: {
-        fontSize: '18px'
+        fontSize: 18
     },
 
     button_area: {
-        marginVertical: '20px',
+        marginVertical: 20,
         width: '80%'
     },
 

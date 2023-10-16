@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
     },
     input:{
-        fontSize: '20px',
+        fontSize: 20,
     }
 })
 

@@ -1,15 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-web";
+import { useNavigation } from '@react-navigation/native';
 
 export default function Home() {
+  const navi = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.info_area}>
-        <Image
-          style={styles.info_img}
-          source={require("../images/icons/pic145.png")}
-        />
+        <Pressable onPress={()=> {navi.navigate('Login')}}>
+          <Image
+            style={styles.info_img}
+            source={require("../images/icons/pic145.png")}
+          />
+        </Pressable>
+
         <View style={{ marginLeft: 15 }}>
           <Text style={styles.info_text1}>Nguyen Van A</Text>
           <Text style={styles.info_text2}>0123456789</Text>
@@ -22,7 +27,8 @@ export default function Home() {
             source={require("../images/icons/pic115.png")}
           />
           <Text style={styles.node_text}>
-            Khai báo <br />y tế
+            Khai báo
+            y tế
           </Text>
         </View>
         <View style={styles.node_chungNhan}>
@@ -31,7 +37,7 @@ export default function Home() {
             source={require("../images/icons/pic127.png")}
           />
           <Text style={styles.node_text}>
-            Chứng nhận <br />
+            Chứng nhận
             ngừa Covid
           </Text>
         </View>
@@ -41,7 +47,7 @@ export default function Home() {
             source={require("../images/icons/pic129.png")}
           />
           <Text style={styles.node_text}>
-            Tư vấn <br />
+            Tư vấn
             sức khoẻ
           </Text>
         </View>
@@ -54,7 +60,8 @@ export default function Home() {
               source={require("../images/icons/pic120.png")}
             />
             <Text style={styles.btn_img_txt}>
-              Hộ chiếu <br /> vắc xin
+              Hộ chiếu
+              vắc xin
             </Text>
           </View>
 
@@ -64,7 +71,8 @@ export default function Home() {
               source={require("../images/icons/pic132.png")}
             />
             <Text style={styles.btn_img_txt}>
-              Đăng ký <br /> tiêm chủng
+              Đăng ký
+              tiêm chủng
             </Text>
           </View>
 
@@ -74,7 +82,8 @@ export default function Home() {
               source={require("../images/icons/pic124.png")}
             />
             <Text style={styles.btn_img_txt}>
-              Đặt lịch <br /> khám
+              Đặt lịch
+              khám
             </Text>
           </View>
         </View>
@@ -85,7 +94,8 @@ export default function Home() {
               source={require("../images/icons/pic118.png")}
             />
             <Text style={styles.btn_img_txt}>
-              Hồ sơ <br /> sức khoẻ
+              Hồ sơ
+              sức khoẻ
             </Text>
           </View>
 
@@ -95,7 +105,8 @@ export default function Home() {
               source={require("../images/icons/pic125.png")}
             />
             <Text style={styles.btn_img_txt}>
-              Phản ánh <br /> tiêm chủng
+              Phản ánh
+              tiêm chủng
             </Text>
           </View>
 
@@ -105,7 +116,8 @@ export default function Home() {
               source={require("../images/icons/pic119.png")}
             />
             <Text style={styles.btn_img_txt}>
-              Dịch vụ <br /> khác
+              Dịch vụ
+              khác
             </Text>
           </View>
         </View>
@@ -148,7 +160,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     marginLeft: 15,
-    border: "2px solid rgba(71, 154, 251)",
+    //border: "2px solid rgba(71, 154, 251)",
   },
   node_img: {
     width: 60,
@@ -158,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 15,
 
-    border: "5px solid rgba(255, 255, 255, 0.25)",
+    //border: "5px solid rgba(255, 255, 255, 0.25)",
   },
   node_text: {
     fontSize: 15,
@@ -177,6 +189,7 @@ const styles = StyleSheet.create({
   },
 
   node_khaiBao: {
+    backgroundColor: '#3390fb',
     backgroundImage: "linear-gradient(40deg, #3390fb, #55bbfb)",
     width: "29%",
     height: "85%",
@@ -184,6 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   node_chungNhan: {
+    backgroundColor: '#21CCBA',
     backgroundImage: "linear-gradient(40deg, #21CCBA, #69EDAC)",
     width: "29%",
     height: "85%",
@@ -191,6 +205,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   node_tuVanF0: {
+    backgroundColor: '#FF6861',
     backgroundImage: "linear-gradient(40deg, #FF6861, #FD928D)",
     width: "29%",
     height: "85%",
@@ -226,7 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   btn_img: {
-    border: "1px solid rgba(137, 208, 255, 0.2)",
+    //border: "1px solid rgba(137, 208, 255, 0.2)",
     borderWidth: 1,
     width: 80,
     height: 80,

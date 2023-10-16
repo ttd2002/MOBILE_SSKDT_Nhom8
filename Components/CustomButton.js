@@ -14,12 +14,13 @@ const styles = StyleSheet.create({
         padding: 14,
         marginVertical: 5,
         borderRadius: 80,
-        backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
+        backgroundColor: '#2b83f9',
+        //backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
         alignItems: 'center',
         
     },
     input: {
-        fontSize: '20px',
+        fontSize: 20,
         fontWeight: 'bold',
         color: 'white'
     }

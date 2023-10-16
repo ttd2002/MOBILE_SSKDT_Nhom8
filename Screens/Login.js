@@ -1,35 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable , ScrollView} from 'react-native';
 import Custominput from '../Components/CustomInput.js';
 import CustomButton from '../Components/CustomButton.js';
+import { useNavigation } from '@react-navigation/native';
 function Screen_login() {
+  var admin = {user: 'admin', pass: '12345'}
+  const navigation = useNavigation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const onPressForgot = () => {
-    console.log('forgot');
+    navigation.navigate('Forgot_password')
   }
   const onPressLogin = () => {
-    console.log('login');
+    if(phone === admin.user && password === admin.pass){
+      navigation.navigate('Home')
+    }
+    else{
+      alert('Invalid account')
+    }
   }
   const onPressFingerPrint = () => {
-    console.log('finger print login');
+    alert('finger print login');
   }
   const onPressRegister = () => {
-    console.log('Register');
+    navigation.navigate('Register')
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.logo_area}>
-        <View style={styles.logo_banner}>
-          <Image style={styles.logo_style} source={require('../images/logo.png')} />
-          <View>
-            <Text style={styles.logo_banner_text_1}>SSKĐT</Text>
-            <Text style={styles.logo_banner_text_2}>Sổ sức khỏe điện tử</Text>
-          </View>
-        </View>
-      </View>
+      
       <View style={styles.login_area}>
         <View style={styles.login_label}>
           <Text style={styles.label_text}>Đăng nhập</Text>
@@ -51,21 +51,21 @@ function Screen_login() {
         </View>
         <View style={styles.finger_print_login_area}>
           <Pressable style={styles.finger_print_container} onPress={onPressFingerPrint}>
-            <Image style={styles.finger_print} source={require("../images/icon_vantay.png")} />
+            <Image source={require('../images/icon_vanTay.png')} style={styles.finger_print} />
             <Text style={styles.Text_Style}>Đăng nhập bằng dấu vân tay</Text>
           </Pressable>
         </View>
         <View style={styles.footer}>
           <View style={styles.finger_print_container}>
-            <Text style = {styles.Text_Style}>Bạn chưa có tài khoản?</Text>
+            <Text style={styles.Text_Style}>Bạn chưa có tài khoản?</Text>
             <Pressable onPress={onPressRegister}>
-              <Text  style = {[styles.Text_Style,{color:'#6a98c5'}]}> Đăng ký ngay</Text>
+              <Text style={[styles.Text_Style, { color: '#6a98c5' }]}> Đăng ký ngay</Text>
             </Pressable>
           </View>
           <View style={styles.finger_print_container}>
-            <Text style = {styles.Text_Style}>Hotline</Text>
+            <Text style={styles.Text_Style}>Hotline</Text>
             <Pressable>
-              <Text style={[styles.Text_Style,{color:'#6a98c5'}]}> 19009095</Text>
+              <Text style={[styles.Text_Style, { color: '#6a98c5' }]}> 19009095</Text>
             </Pressable>
           </View>
         </View>
@@ -79,60 +79,38 @@ export default Screen_login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
+    //backgroundColor: '#2b83f9',
+    //backgroundImage: 'linear-gradient(to right, #2b83f9, #47a6fa)',
     alignItems: 'center',
     justifyContent: 'center',
 
   },
-  logo_area: {
-    width: '100%',
-    height: '30%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo_banner: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  logo_style: {
-    width: '100px',
-    height: '100px'
-  },
-  logo_banner_text_1: {
-    color: 'white',
-    fontSize: '45px',
-    fontWeight: '500',
-  },
-  logo_banner_text_2: {
-    color: 'white',
-    fontSize: '15px',
-    fontWeight: '350',
-  },
+  
   login_area: {
 
     backgroundColor: '#f1f9ff',
     width: '100%',
-    height: '80%',
-    marginBottom: '-50px',
-    borderRadius: '35px',
+    height: '110%',
+    marginBottom: -50,
+    borderRadius: 35,
     alignItems: 'center',
 
   },
   login_label: {
 
-    marginVertical: '25px'
+    marginVertical: 25
 
   },
   label_text: {
     fontWeight: 'bold',
-    fontSize: '17px'
+    fontSize: 17
   },
   input_area: {
 
     width: '80%'
   },
   Text_Style: {
-    fontSize: '18px'
+    fontSize: 18
   },
   forgot: {
     marginVertical: 20,
@@ -140,12 +118,12 @@ const styles = StyleSheet.create({
   },
   text_forgot: {
     color: '#5886c6',
-    fontSize: '20px',
-    fontWeight: '500'
+    fontSize: 20,
+    fontWeight: 500
   },
   input_text: {
     backgroundColor: 'white',
-    padding: '10px',
+    padding: 10,
     marginVertical: '5px',
     width: '100%'
   },
@@ -153,7 +131,7 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   finger_print_login_area: {
-    marginVertical: '25px',
+    marginVertical: 25,
     width: '70%'
 
   },
@@ -162,13 +140,13 @@ const styles = StyleSheet.create({
 
   },
   finger_print: {
-    width: '25px',
-    height: '25px',
-    marginRight: '10px'
+    width: 25,
+    height: 25,
+    marginRight: 10
   },
-  footer:{
-    width:'80%',
-    marginTop: '60px',
+  footer: {
+    width: '80%',
+    marginTop: 60,
     alignItems: 'center'
   }
 
