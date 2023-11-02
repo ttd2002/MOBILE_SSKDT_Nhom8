@@ -14,7 +14,7 @@ function Screen_login() {
   }
   const onPressLogin = () => {
     if(phone === admin.user && password === admin.pass){
-      navigation.navigate('Home')
+      navigation.navigate('Tab_bottom')
     }
     else{
       alert('Invalid account')

@@ -7,6 +7,7 @@ import Home from "./Screens/Home";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CustomHeader from "./Components/Header";
+import Tab_bottom from "./Screens/Tab_bottom";
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Screen_login} />
         <Stack.Screen name="Forgot_password" component={Screen_forgot_pass} />
         <Stack.Screen name="Register" component={Screen_Register} />
-        <Stack.Screen options={{headerShown: false}} name="Home" component={Home} />
+        <Stack.Screen options={{headerShown:false}} name="Tab_bottom" component={Tab_bottom} />
       </Stack.Navigator>
     </NavigationContainer>
   );

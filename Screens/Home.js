@@ -1,126 +1,86 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-web";
 import { useNavigation } from '@react-navigation/native';
-
+import Icon from 'react-native-vector-icons/Ionicons'
+import List from "../data/ListData.json"
 export default function Home() {
   const navi = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.info_area}>
-        <Pressable onPress={()=> {navi.navigate('Login')}}>
-          <Image
-            style={styles.info_img}
-            source={require("../images/icons/pic145.png")}
-          />
-        </Pressable>
-
-        <View style={{ marginLeft: 15 }}>
-          <Text style={styles.info_text1}>Nguyen Van A</Text>
-          <Text style={styles.info_text2}>0123456789</Text>
+      <View style={styles.infoArea}>
+        <View style={styles.circle}>
+          <Icon name="person" size={40} color={'#a6a8aa'} />
+        </View>
+        <View style={styles.NameArea}>
+          <Text style={styles.text_hello}>Xin chào</Text>
+          <Text style={styles.text_name}>Trần Thanh Đại</Text>
         </View>
       </View>
-      <View style={styles.node_area}>
-        <View style={styles.node_khaiBao}>
-          <Image
-            style={styles.node_img}
-            source={require("../images/icons/pic115.png")}
-          />
-          <Text style={styles.node_text}>
-            Khai báo
-            y tế
-          </Text>
+      <View style={styles.btnArea}>
+        <View style={styles.btn1}>
+          <Image style={styles.imgSty} source={require('../images/icons/pic115.png')} />
+          <Text style={styles.text_btn}>Khai báo</Text>
+          <Text style={styles.text_btn}>Y tế</Text>
         </View>
-        <View style={styles.node_chungNhan}>
-          <Image
-            style={styles.node_img}
-            source={require("../images/icons/pic127.png")}
-          />
-          <Text style={styles.node_text}>
-            Chứng nhận
-            ngừa Covid
-          </Text>
+        <View style={styles.btn2}>
+          <Image style={styles.imgSty} source={require('../images/icons/pic127.png')} />
+          <Text style={styles.text_btn}>Chứng nhận</Text>
+          <Text style={styles.text_btn}>ngừa Covid</Text>
         </View>
-        <View style={styles.node_tuVanF0}>
-          <Image
-            style={styles.node_img}
-            source={require("../images/icons/pic129.png")}
-          />
-          <Text style={styles.node_text}>
-            Tư vấn
-            sức khoẻ
-          </Text>
+        <View style={styles.btn3}>
+          <Image style={styles.imgSty} source={require('../images/icons/pic129.png')} />
+          <Text style={styles.text_btn}>Tư vấn</Text>
+          <Text style={styles.text_btn}>sức khỏe f0</Text>
         </View>
       </View>
-      <View style={styles.btn_earea}>
-        <View style={styles.btn_earea1}>
-          <View style={styles.btn_earea3}>
-            <Image
-              style={styles.btn_img}
-              source={require("../images/icons/pic120.png")}
-            />
-            <Text style={styles.btn_img_txt}>
-              Hộ chiếu
-              vắc xin
-            </Text>
-          </View>
+      <View style={styles.footerArea}>
+        <FlatList
+          numColumns={3}
+          data={List}
+          columnWrapperStyle={{ gap: 10, marginTop: 10 }}
+          renderItem={({ item }) =>
+            <Pressable onPress={() => { item.id == 6 ? alert('xem them') : alert('khac') }}>
+              <View style={styles.item_container}>
+                <Image style={styles.btn_img} source={{ uri: item.img }} />
+                <View style={{ alignItems: 'center', width: 100 }}>
+                  <Text>{item.name}</Text>
 
-          <View style={styles.btn_earea3}>
-            <Image
-              style={styles.btn_img}
-              source={require("../images/icons/pic132.png")}
-            />
-            <Text style={styles.btn_img_txt}>
-              Đăng ký
-              tiêm chủng
-            </Text>
-          </View>
+                </View>
+              </View>
+            </Pressable>
 
-          <View style={styles.btn_earea3}>
-            <Image
-              style={styles.btn_img}
-              source={require("../images/icons/pic124.png")}
-            />
-            <Text style={styles.btn_img_txt}>
-              Đặt lịch
-              khám
-            </Text>
-          </View>
+          }
+        />
+
+
+        <View style={styles.newpaper_text}>
+          <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#353b42', }}>Cẩm nang y tế</Text>
+          <Pressable>
+            <Text style={{ color: '#5e83d4' }}>Tất cả</Text>
+
+          </Pressable>
         </View>
-        <View style={styles.btn_earea1}>
-          <View style={styles.btn_earea3}>
-            <Image
-              style={styles.btn_img}
-              source={require("../images/icons/pic118.png")}
-            />
-            <Text style={styles.btn_img_txt}>
-              Hồ sơ
-              sức khoẻ
-            </Text>
-          </View>
+        <FlatList
 
-          <View style={styles.btn_earea3}>
-            <Image
-              style={styles.btn_img}
-              source={require("../images/icons/pic125.png")}
-            />
-            <Text style={styles.btn_img_txt}>
-              Phản ánh
-              tiêm chủng
-            </Text>
-          </View>
+          data={[
+            { name: 'Cam nang so suc khoe dien tu', img: 'https://res.cloudinary.com/dwu4fcnse/image/upload/v1698923600/images/bao1_aaacpd.jpg' },
+            { name: 'Cam nang so suc khoe dien tu', img: 'https://res.cloudinary.com/dwu4fcnse/image/upload/v1698923598/images/bao2_rtputz.jpg' }
 
-          <View style={styles.btn_earea3}>
-            <Image
-              style={styles.btn_img}
-              source={require("../images/icons/pic119.png")}
-            />
-            <Text style={styles.btn_img_txt}>
-              Dịch vụ
-              khác
-            </Text>
-          </View>
-        </View>
+          ]}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) =>
+            <Pressable>
+              <View style={styles.newpp_container}>
+                <Image style={styles.pp_img} source={{ uri: item.img }} />
+                <Text>{item.name}</Text>
+              </View>
+            </Pressable>
+
+          }
+        />
+
       </View>
     </View>
   );
@@ -129,129 +89,121 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "ffffff",
-    // backgroundImage: "linear-gradient(to right, #FFFFFF, #A8DAFA)",
-    // alignItems: "flex-end",
-    justifyContent: "flex-end",
-  },
-  info_area: {
-    flexDirection: "row",
-    width: "100%",
-    height: "12%",
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  info_text1: {
-    fontSize: 23,
-    fontWeight: "bold",
-    color: "#585858",
-  },
-  info_text2: {
-    fontSize: 13,
-    fontWeight: "bold",
-    color: "#585858",
-    marginTop: 2,
-  },
-  info_img: {
-    width: 75,
-    height: 75,
-    borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 40,
-    marginLeft: 15,
-    //border: "2px solid rgba(71, 154, 251)",
-  },
-  node_img: {
-    width: 60,
-    height: 60,
-    borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 30,
-    marginTop: 15,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-end',
 
-    //border: "5px solid rgba(255, 255, 255, 0.25)",
+    alignItems: 'center',
+    gap: 15
   },
-  node_text: {
-    fontSize: 15,
-    fontWeight: "medium",
-    color: "white",
-    marginTop: 5,
-    textAlign: "center",
+  infoArea: {
+    flexDirection: 'row',
+    gap: 10,
+    width: '90%',
   },
-  node_area: {
-    flexDirection: "row",
-    width: "100%",
-    height: "27%",
-    backgroundColor: "#transparent",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
+  circle: {
+    width: 70,
+    height: 70,
+    borderRadius: 70,
+    borderWidth: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#99c3fb',
+    shadowOpacity: 1,
 
-  node_khaiBao: {
-    backgroundColor: '#3390fb',
-    backgroundImage: "linear-gradient(40deg, #3390fb, #55bbfb)",
-    width: "29%",
-    height: "85%",
-    alignItems: "center",
-    borderRadius: 15,
+    borderColor: '#3c8dfc'
   },
-  node_chungNhan: {
-    backgroundColor: '#21CCBA',
-    backgroundImage: "linear-gradient(40deg, #21CCBA, #69EDAC)",
-    width: "29%",
-    height: "85%",
-    alignItems: "center",
-    borderRadius: 15,
+  NameArea: {
+    justifyContent: 'center',
   },
-  node_tuVanF0: {
-    backgroundColor: '#FF6861',
-    backgroundImage: "linear-gradient(40deg, #FF6861, #FD928D)",
-    width: "29%",
-    height: "85%",
-    alignItems: "center",
-    borderRadius: 15,
+  text_hello: {
+    fontSize: 20,
+    color: '#a1a1a4'
   },
-  btn_earea1: {
-    width: "85%",
-    height: "35%",
-    backgroundColor: "#transparent",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-around",
-    marginTop: 8,
+  text_name: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#16222a'
   },
-  btn_earea3: {
-    width: "30%",
-    height: "100%",
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "center",
+  btn1: {
+    height: 150,
+    width: 100,
+    backgroundColor: '#43a1fa',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
   },
-  btn_earea: {
-    flexDirection: 1,
-    flexWrap: "wrap",
-    width: "100%",
-    height: "60%",
-    backgroundColor: "#EEF1F8",
-    // backgroundImage: "linear-gradient(40deg, #3390fb, #55bbfb)",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    alignItems: "center",
-    justifyContent: "flex-start",
+  btn2: {
+    height: 150,
+    width: 100,
+    backgroundColor: '#61e8ad',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20
+
+  },
+  btn3: {
+    height: 150,
+    width: 100,
+    backgroundColor: '#fe8f8a',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20
+
+  },
+  imgSty: {
+    height: 50,
+    width: 50,
+    resizeMode: 'contain',
+    marginBottom: 5
+  },
+  btnArea: {
+    flexDirection: 'row',
+    gap: 10
+  },
+  text_btn: {
+    color: '#fff'
+  },
+  footerArea: {
+    width: '100%',
+    height: '60%',
+    backgroundColor: '#edf0f8',
+    borderRadius: 20,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
   btn_img: {
-    //border: "1px solid rgba(137, 208, 255, 0.2)",
-    borderWidth: 1,
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    height: 70,
+    width: 70,
+    resizeMode: 'contain'
   },
-  btn_img_txt: {
-    fontSize: 15,
-    fontWeight: "medium",
-    color: "#585858",
-    marginTop: 5,
-    textAlign: "center",
+  item_container: {
+    height: 120,
+    width: 120,
+    gap: 10,
+    alignItems: 'center',
   },
+  newpaper_text: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%',
+
+  },
+  newpp_container: {
+    width: 200,
+    height: 150,
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+    marginVertical: 10,
+    borderRadius: 10
+  },
+  pp_img: {
+    height: 100,
+    width: 200,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+
+    marginBottom: 10,
+  }
+
+
 });
