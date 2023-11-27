@@ -6,6 +6,8 @@ import Icon from "react-native-vector-icons/Ionicons"
 const Personal = () => {
   const naviPer = useNavigation()
   const [users, setUsers] = useState([])
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
   const [qrCode, setQrCode] = useState(
     "https://653f4af99e8bd3be29e02de4.mockapi.io/user"
   )
@@ -22,6 +24,8 @@ const Personal = () => {
         res.forEach((element) => {
           if (element.login) {
             setQrCode(element.qrCode)
+            setName(element.userName)
+            setPhone(element.phone)
           }
         })
       })
@@ -74,8 +78,8 @@ const Personal = () => {
             <Icon name="person" size={40} color={"#B4B4B4"} />
           </View>
           <View>
-            <Text style={styles.text1}>CBT</Text>
-            <Text style={styles.text2}>0123456789</Text>
+            <Text style={styles.text1}>{name}</Text>
+            <Text style={styles.text2}>{phone}</Text>
           </View>
         </View>
         <Pressable style={styles.logout} onPress={onPressLogout}>
