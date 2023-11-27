@@ -12,6 +12,7 @@ import Scanner from "./Screens/Scanner"
 import Schedule from "./Screens/Schedule"
 import Notify from "./Screens/Notify"
 import Personal from "./Screens/Personal"
+import Cetification from "./Screens/Certification"
 
 const Stack = createStackNavigator()
 
@@ -23,6 +24,7 @@ export default function App() {
     // <Home />
     // <Schedule />
     // <Notify />
+    // <Cetification />
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"

@@ -11,12 +11,7 @@ const ModalOTP = ({ children, onSubmit, cancelable, visible = false, onDismiss, 
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <View style = {{alignItems: 'center', justifyContent:'center'}}>
-                        <Text style = {{fontWeight: 'bold'}}>Xác thực OTP</Text>
-                    </View>
-                    <View >
-                        <Text style = {{fontSize: 20}}>Mã OTP</Text>
-                    </View>
+                    
                     <View>
                         {children}
                     </View>

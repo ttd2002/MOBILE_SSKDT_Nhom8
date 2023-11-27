@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import Icon from "react-native-vector-icons/Ionicons"
 import List from "../data/ListData.json"
-export default function Home() {
+export default function Home({ navigation }) {
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
   const [loading, setLoading] = useState(false)
@@ -51,14 +51,14 @@ export default function Home() {
           <Text style={styles.text_btn}>Khai báo</Text>
           <Text style={styles.text_btn}>Y tế</Text>
         </View>
-        <View style={styles.btn2}>
+        <Pressable style={styles.btn2}>
           <Image
             style={styles.imgSty}
             source={require("../images/icons/pic127.png")}
           />
           <Text style={styles.text_btn}>Chứng nhận</Text>
           <Text style={styles.text_btn}>ngừa Covid</Text>
-        </View>
+        </Pressable>
         <View style={styles.btn3}>
           <Image
             style={styles.imgSty}

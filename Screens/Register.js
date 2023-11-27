@@ -25,7 +25,7 @@ function Screen_Register() {
             .verifyPhoneNumber(phone, recaptchaVerifier.current)
             .then(setVertificationId);
         setCheck(true)
-        if(check){
+        if (check) {
             setVisible(true)
         }
 
@@ -111,7 +111,7 @@ function Screen_Register() {
                     firebaseConfig={firebaseConfig}
                 />
                 <View style={styles.button_area}>
-                    <CustomButton text={"Đăng ký"} onPress={sendVerification} />           
+                    <CustomButton text={"Đăng ký"} onPress={sendVerification} />
                 </View>
 
                 <ModalOTP
@@ -120,7 +120,12 @@ function Screen_Register() {
                     onSubmit={confirmCode}
                     cancelable
                 >
-
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ fontWeight: 'bold' }}>Xác thực OTP</Text>
+                    </View>
+                    <View >
+                        <Text style={{ fontSize: 20 }}>Mã OTP</Text>
+                    </View>
                     <Custominput placeholder='Nhập nội dung' value={code} setValue={setCode} />
 
 
