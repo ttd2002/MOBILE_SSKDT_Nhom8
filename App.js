@@ -11,6 +11,7 @@ import Tab_bottom from "./Screens/Tab_bottom"
 import Scanner from "./Screens/Scanner"
 import Schedule from "./Screens/Schedule"
 import Notify from "./Screens/Notify"
+import Personal from "./Screens/Personal"
 
 const Stack = createStackNavigator()
 
@@ -29,7 +30,7 @@ export default function App() {
           headerBackTitleVisible: false,
           headerTitle: () => <CustomHeader />,
           headerStyle: {
-            height: 200,
+            height: 180,
             backgroundColor: "#2b83f9",
           },
           headerLeftContainerStyle: {
@@ -41,6 +42,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Screen_login} />
         <Stack.Screen name="Forgot_password" component={Screen_forgot_pass} />
         <Stack.Screen name="Register" component={Screen_Register} />
+        <Stack.Screen name="Personal" component={Personal} />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Tab_bottom"
