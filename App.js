@@ -44,7 +44,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Screen_login} />
         <Stack.Screen name="Forgot_password" component={Screen_forgot_pass} />
         <Stack.Screen name="Register" component={Screen_Register} />
-        <Stack.Screen name="Personal" component={Personal} />
+        <Stack.Screen name="Certification" component={Cetification} />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Tab_bottom"
