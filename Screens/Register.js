@@ -1,13 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { StyleSheet, Text, View, Image, Pressable, TextInput } from 'react-native';
 import Custominput from '../Components/CustomInput.js';
 import CustomButton from '../Components/CustomButton.js';
+import ModalOTP from './ModalOTP.js';
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
+import { firebaseConfig } from './config.js';
+import firebase from 'firebase/compat/app';
+
 function Screen_Register() {
     const [fullName, setfullName] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setpassword] = useState('');
+    const [visible, setVisible] = useState(false);
+    const [check, setCheck] = useState(false);
+    const [code, setCode] = useState('');
 
+    const [verificationId, setVertificationId] = useState(null);
+    const recaptchaVerifier = useRef(null);
+
+    const sendVerification = () => {
+        const phoneProvider = new firebase.auth.PhoneAuthProvider();
+        phoneProvider
+            .verifyPhoneNumber(phone, recaptchaVerifier.current)
+            .then(setVertificationId);
+        setCheck(true)
+        if(check){
+            setVisible(true)
+        }
+
+    }
+
+    const confirmCode = () => {
+        const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, code);
+        firebase.auth().signInWithCredential(credential)
+            .then(() => {
+                setCode('');
+                onPressRegister(phone, fullName, password)
+                setCheck(false)
+            })
+            .catch((error) => {
+                alert("Xác thực thất bại")
+            })
+    }
     const onPressRegister = (phoneNum, name, pwd) => {
         fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user", {
             method: "POST",
@@ -41,18 +76,19 @@ function Screen_Register() {
             },
             body: JSON.stringify({
                 "qrCode": "https://653f4af99e8bd3be29e02de4.mockapi.io/user" + `/${userId}`,
-                
+
             })
         }).then((res) => res.json())
             .then(resJson => {
                 console.log('updated:', resJson)
             }).catch(e => { console.log(e) })
     }
-    
+
 
 
     return (
         <View style={styles.container}>
+
             <View style={styles.Register_area}>
                 <View style={styles.Register_label}>
                     <Text style={styles.label_text}>Đăng ký</Text>
@@ -65,17 +101,30 @@ function Screen_Register() {
                     <Text style={styles.Text_Style}>Số điện thoại</Text>
                     <Custominput placeholder='Nhập nội dung' value={phone} setValue={setPhone} />
                     <Text style={styles.Text_Style}>Mật khẩu</Text>
-                    <Custominput placeholder='Nhập nội dung' value={password} setValue={setpassword} secureTextEntry/>
+                    <Custominput placeholder='Nhập nội dung' value={password} setValue={setpassword} secureTextEntry />
                 </View>
                 <View style={styles.input_area}>
                     <Text style={styles.Text_Style}> <Text style={{ color: 'red' }}>*</Text> Vui lòng cung cấp thông tin chính xác để đảm bảo công tác phòng chống dịch Covid-19 và nhận chứng nhận tiêm chủng</Text>
                 </View>
+                <FirebaseRecaptchaVerifierModal
+                    ref={recaptchaVerifier}
+                    firebaseConfig={firebaseConfig}
+                />
                 <View style={styles.button_area}>
-                    <CustomButton text={"Đăng ký"} onPress={() => {
-                        onPressRegister(phone, fullName, password)
-                    }} />
+                    <CustomButton text={"Đăng ký"} onPress={sendVerification} />           
                 </View>
 
+                <ModalOTP
+                    visible={visible}
+                    onDismiss={() => setVisible(false)}
+                    onSubmit={confirmCode}
+                    cancelable
+                >
+
+                    <Custominput placeholder='Nhập nội dung' value={code} setValue={setCode} />
+
+
+                </ModalOTP>
 
             </View>
 
