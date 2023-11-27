@@ -7,10 +7,13 @@ import ModalOTP from './ModalOTP.js';
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 import { firebaseConfig } from './config.js';
 import firebase from 'firebase/compat/app';
+import { useNavigation } from '@react-navigation/native';
 
 function Screen_Register() {
+    const naviRes = useNavigation();
     const [fullName, setfullName] = useState('');
     const [phone, setPhone] = useState('');
+
     const [password, setpassword] = useState('');
     const [visible, setVisible] = useState(false);
     const [check, setCheck] = useState(false);
@@ -22,7 +25,7 @@ function Screen_Register() {
     const sendVerification = () => {
         const phoneProvider = new firebase.auth.PhoneAuthProvider();
         phoneProvider
-            .verifyPhoneNumber(phone, recaptchaVerifier.current)
+            .verifyPhoneNumber('+84 '+phone.substring(1), recaptchaVerifier.current)
             .then(setVertificationId);
         setCheck(true)
         if (check) {
@@ -38,6 +41,11 @@ function Screen_Register() {
                 setCode('');
                 onPressRegister(phone, fullName, password)
                 setCheck(false)
+                setVisible(false)
+                naviRes.navigate("Login")
+                setPhone('')
+                setfullName('')
+                setpassword('')
             })
             .catch((error) => {
                 alert("Xác thực thất bại")
