@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Icon from "react-native-vector-icons/Ionicons"
-import { useNavigation } from "@react-navigation/native"
 
 const Cetification = () => {
   return (
@@ -41,7 +40,7 @@ const Cetification = () => {
             </View>
           </View>
           <View style={styles.info1}>
-            <Icon name="book" size={23} color={"#5D5D5D"} />
+            <Icon name="newspaper-outline" size={23} color={"#5D5D5D"} />
             <View>
               <Text style={styles.text4}>Số CCCD/Hộ chiêu:</Text>
               <Text style={styles.text3}>000000000</Text>

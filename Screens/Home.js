@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import Icon from "react-native-vector-icons/Ionicons"
 import List from "../data/ListData.json"
-export default function Home({ navigation }) {
+export default function Home() {
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
   const [loading, setLoading] = useState(false)
@@ -43,14 +43,14 @@ export default function Home({ navigation }) {
         </View>
       </View>
       <View style={styles.btnArea}>
-        <View style={styles.btn1}>
+        <Pressable style={styles.btn1}>
           <Image
             style={styles.imgSty}
             source={require("../images/icons/pic115.png")}
           />
           <Text style={styles.text_btn}>Khai báo</Text>
           <Text style={styles.text_btn}>Y tế</Text>
-        </View>
+        </Pressable>
         <Pressable style={styles.btn2}>
           <Image
             style={styles.imgSty}
@@ -59,14 +59,14 @@ export default function Home({ navigation }) {
           <Text style={styles.text_btn}>Chứng nhận</Text>
           <Text style={styles.text_btn}>ngừa Covid</Text>
         </Pressable>
-        <View style={styles.btn3}>
+        <Pressable style={styles.btn3}>
           <Image
             style={styles.imgSty}
             source={require("../images/icons/pic129.png")}
           />
           <Text style={styles.text_btn}>Tư vấn</Text>
           <Text style={styles.text_btn}>sức khỏe f0</Text>
-        </View>
+        </Pressable>
       </View>
       <View style={styles.footerArea}>
         <FlatList
