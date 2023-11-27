@@ -1,35 +1,70 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable , ScrollView} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native';
 import Custominput from '../Components/CustomInput.js';
 import CustomButton from '../Components/CustomButton.js';
 import { useNavigation } from '@react-navigation/native';
 function Screen_login() {
-  var admin = {user: 'admin', pass: '12345'}
   const navigation = useNavigation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const onPressForgot = () => {
     navigation.navigate('Forgot_password')
   }
   const onPressLogin = () => {
-    if(phone === admin.user && password === admin.pass){
-      navigation.navigate('Tab_bottom')
-    }
-    else{
-      alert('Invalid account')
-    }
+    getUsers();
+    var Correct = false;
+    users.forEach(element => {
+      if (element.phone === phone && element.password === password) {
+        Correct = true;
+        editLoginStatus(element.userId);
+      }
+    });
+    Correct ? navigation.navigate("Tab_bottom") : alert("Tài khoản không hợp lệ")
   }
   const onPressFingerPrint = () => {
-    alert('finger print login');
+    alert("Đăng nhập bằng dấu vân tay")
   }
   const onPressRegister = () => {
     navigation.navigate('Register')
   }
+  const editLoginStatus = (userId) => {
+    fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user/" + `/${userId}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        "login": true,
 
+      })
+    }).then((res) => res.json())
+      .then(resJson => {
+        console.log('updated:', resJson)
+      }).catch(e => { console.log(e) })
+  }
+  useEffect(() => {
+    getUsers()
+  }, []);
+  
+  const getUsers = async () => {
+    setLoading(true)
+    await fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user")
+      .then((res) => res.json())
+      .then((res) => {
+        setUsers(res);
+        console.log(users)
+      })
+      .catch(e => console.log(e))
+    setLoading(false)
+  }
   return (
     <View style={styles.container}>
-      
+
       <View style={styles.login_area}>
         <View style={styles.login_label}>
           <Text style={styles.label_text}>Đăng nhập</Text>
@@ -37,9 +72,9 @@ function Screen_login() {
         </View>
         <View style={styles.input_area}>
           <Text style={styles.Text_Style}>Số điện thoại</Text>
-          <Custominput placeholder='Nhập nội dung' value={phone} setValue={setPhone} />
+          <Custominput placeholder='Nhập nội dung' value={phone} setValue={(phone) => setPhone(phone)} />
           <Text style={styles.Text_Style}>Mật khẩu</Text>
-          <Custominput placeholder='Nhập mật khẩu' value={password} setValue={setPassword} secureTextEntry />
+          <Custominput placeholder='Nhập mật khẩu' value={password} setValue={(password) => setPassword(password)} secureTextEntry />
         </View>
         <View style={styles.forgot}>
           <Pressable onPress={onPressForgot}>
@@ -85,7 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
   },
-  
+
   login_area: {
 
     backgroundColor: '#f1f9ff',

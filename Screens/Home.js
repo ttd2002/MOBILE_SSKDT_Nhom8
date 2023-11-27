@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, Pressable, FlatList } from "react-native";
-import { SafeAreaView } from "react-native-web";
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import List from "../data/ListData.json"
 export default function Home() {
-  const navi = useNavigation();
+  const [users, setUsers] = useState([]);
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    getUsers()
+
+  }, [name]);
+  const getUsers = async () => {
+    setLoading(true)
+    await fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user")
+      .then((res) => res.json())
+      .then((res) => {
+        setUsers(res);
+        res.forEach(element => {
+          if(element.login){
+            setName(element.userName)
+          }
+        });
+      })
+      .catch(e => console.log(e))
+    setLoading(false)
+  }
   return (
     <View style={styles.container}>
       <View style={styles.infoArea}>
@@ -14,7 +33,7 @@ export default function Home() {
         </View>
         <View style={styles.NameArea}>
           <Text style={styles.text_hello}>Xin chào</Text>
-          <Text style={styles.text_name}>Trần Thanh Đại</Text>
+          <Text style={styles.text_name}>{name}</Text>
         </View>
       </View>
       <View style={styles.btnArea}>

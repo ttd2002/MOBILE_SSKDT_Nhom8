@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import Custominput from '../Components/CustomInput.js';
 import CustomButton from '../Components/CustomButton.js';
@@ -8,9 +8,47 @@ function Screen_Register() {
     const [phone, setPhone] = useState('');
     const [password, setpassword] = useState('');
 
-    const onPressRegister = () => {
-        alert('Register');
+    const onPressRegister = (phoneNum, name, pwd) => {
+        fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                "phone": phoneNum,
+                "userName": name,
+                "password": pwd,
+                "login": false,
+
+                "qrCode": "https://653f4af99e8bd3be29e02de4.mockapi.io/user/",
+            })
+        }).then((res) => res.json())
+            .then(resJson => {
+                console.log('Users:', resJson)
+                editQr(resJson.userId)
+                alert("Đăng ký thành công")
+            }).catch(e => { console.log(e) })
+
     }
+
+    const editQr = (userId) => {
+        fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user/" + `/${userId}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                "qrCode": "https://653f4af99e8bd3be29e02de4.mockapi.io/user" + `/${userId}`,
+                
+            })
+        }).then((res) => res.json())
+            .then(resJson => {
+                console.log('updated:', resJson)
+            }).catch(e => { console.log(e) })
+    }
+    
 
 
     return (
@@ -27,13 +65,15 @@ function Screen_Register() {
                     <Text style={styles.Text_Style}>Số điện thoại</Text>
                     <Custominput placeholder='Nhập nội dung' value={phone} setValue={setPhone} />
                     <Text style={styles.Text_Style}>Mật khẩu</Text>
-                    <Custominput placeholder='Nhập nội dung' value={password} setValue={setpassword} />
+                    <Custominput placeholder='Nhập nội dung' value={password} setValue={setpassword} secureTextEntry/>
                 </View>
                 <View style={styles.input_area}>
                     <Text style={styles.Text_Style}> <Text style={{ color: 'red' }}>*</Text> Vui lòng cung cấp thông tin chính xác để đảm bảo công tác phòng chống dịch Covid-19 và nhận chứng nhận tiêm chủng</Text>
                 </View>
                 <View style={styles.button_area}>
-                    <CustomButton text={"Đăng ký"} onPress={onPressRegister} />
+                    <CustomButton text={"Đăng ký"} onPress={() => {
+                        onPressRegister(phone, fullName, password)
+                    }} />
                 </View>
 
 
