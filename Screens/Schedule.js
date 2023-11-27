@@ -18,10 +18,10 @@ const Schedule = () => {
         </View>
         <View style={styles.schedule}>
           <Image
-            style={{ width: 250, height: 150 }}
+            style={{ width: 250, height: 150, marginTop: 100 }}
             source={require("../images/Search-app-scaled.png")}
           />
-          <Text>Không có dữ liệu</Text>
+          <Text style={styles.text2}>Không có dữ liệu hiển thị</Text>
         </View>
       </View>
     </View>

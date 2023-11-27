@@ -10,7 +10,7 @@ const Notify = () => {
       <View style={styles.view2}>
         <View style={styles.notify}>
           <Image
-            style={{ width: 250, height: 150 }}
+            style={{ width: 250, height: 150, marginTop: 100 }}
             source={require("../images/Search-app-scaled.png")}
           />
           <Text>Không có dữ liệu</Text>
