@@ -13,6 +13,8 @@ import Schedule from "./Screens/Schedule"
 import Notify from "./Screens/Notify"
 import Personal from "./Screens/Personal"
 import Cetification from "./Screens/Certification"
+import HealthFacilities from "./Screens/HealthFacilities"
+import InfoUser from "./Screens/InfoUser"
 
 const Stack = createStackNavigator()
 
@@ -25,6 +27,8 @@ export default function App() {
     // <Schedule />
     // <Notify />
     // <Cetification />
+    // <HealthFacilities />
+    // <InfoUser />
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
