@@ -4,7 +4,6 @@ import QRCode from "react-native-qrcode-svg"
 import { useNavigation } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
 const Certification = () => {
-  const naviPer = useNavigation()
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")

@@ -33,24 +33,26 @@ export default function App() {
     // <InfoUser />
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="InfoUser"
         screenOptions={{
           headerBackTitleVisible: false,
-          headerTitle: () => <CustomHeader />,
-          headerStyle: {
-            height: 180,
-            backgroundColor: "#2b83f9",
-          },
-          headerLeftContainerStyle: {
-            marginTop: -40,
-          },
-          headerTintColor: "white",
+          headerShown: false,
+          // headerTitle: () => <CustomHeader />,
+          // headerStyle: {
+          //   height: 180,
+          //   backgroundColor: "#2b83f9",
+          // },
+          // headerLeftContainerStyle: {
+          //   marginTop: -40,
+          // },
+          // headerTintColor: "white",
         }}
       >
         <Stack.Screen name="Login" component={Screen_login} />
         <Stack.Screen name="Forgot_password" component={Screen_forgot_pass} />
         <Stack.Screen name="Register" component={Screen_Register} />
         <Stack.Screen name="Certification" component={Cetification} />
+        <Stack.Screen name="InfoUser" component={InfoUser} />
         <Stack.Screen
           options={{ headerShown: false }}
           name="Tab_bottom"
