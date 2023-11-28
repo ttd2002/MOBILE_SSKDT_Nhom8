@@ -27,7 +27,9 @@ export default function App() {
     // <Schedule />
     // <Notify />
     // <Cetification />
+    // <Certification01 />
     // <HealthFacilities />
+    // <Personal />
     // <InfoUser />
     <NavigationContainer>
       <Stack.Navigator
