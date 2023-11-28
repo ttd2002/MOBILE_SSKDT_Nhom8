@@ -15,6 +15,7 @@ import Personal from "./Screens/Personal"
 import Cetification from "./Screens/Certification"
 import HealthFacilities from "./Screens/HealthFacilities"
 import InfoUser from "./Screens/InfoUser"
+import More from "./Screens/More"
 
 const Stack = createStackNavigator()
 
@@ -31,21 +32,21 @@ export default function App() {
     // <HealthFacilities />
     // <Personal />
     // <InfoUser />
+    // <More />
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="InfoUser"
+        initialRouteName="Login"
         screenOptions={{
           headerBackTitleVisible: false,
-          headerShown: false,
-          // headerTitle: () => <CustomHeader />,
-          // headerStyle: {
-          //   height: 180,
-          //   backgroundColor: "#2b83f9",
-          // },
-          // headerLeftContainerStyle: {
-          //   marginTop: -40,
-          // },
-          // headerTintColor: "white",
+          headerTitle: () => <CustomHeader />,
+          headerStyle: {
+            height: 180,
+            backgroundColor: "#2b83f9",
+          },
+          headerLeftContainerStyle: {
+            marginTop: -40,
+          },
+          headerTintColor: "white",
         }}
       >
         <Stack.Screen name="Login" component={Screen_login} />

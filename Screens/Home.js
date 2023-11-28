@@ -9,7 +9,9 @@ import {
 } from "react-native"
 import Icon from "react-native-vector-icons/Ionicons"
 import List from "../data/ListData.json"
+import { useNavigation } from "@react-navigation/native"
 export default function Home() {
+  const naviHome = useNavigation()
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
   const [loading, setLoading] = useState(false)
