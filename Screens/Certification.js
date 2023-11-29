@@ -4,6 +4,7 @@ import QRCode from "react-native-qrcode-svg"
 import { useNavigation } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
 const Certification = () => {
+  const naviCer = useNavigation();
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
@@ -35,9 +36,11 @@ const Certification = () => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <View style={styles.title1}>
-          <Icon name="arrow-back-outline" size={28} color={"#FFFFFF"} />
-        </View>
+        <Pressable onPress={()=>{naviCer.navigate("Home")}}>
+          <View style={styles.title1}>
+            <Icon name="arrow-back-outline" size={28} color={"#FFFFFF"} />
+          </View>
+        </Pressable>
         <View style={styles.title2}>
           <Text style={styles.text1}>Chứng nhận ngừa Covid:</Text>
         </View>

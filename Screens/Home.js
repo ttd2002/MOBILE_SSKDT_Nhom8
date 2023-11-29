@@ -53,7 +53,7 @@ export default function Home() {
           <Text style={styles.text_btn}>Khai báo</Text>
           <Text style={styles.text_btn}>Y tế</Text>
         </Pressable>
-        <Pressable style={styles.btn2}>
+        <Pressable style={styles.btn2} onPress={()=>{naviHome.navigate('Certification')}}>
           <Image
             style={styles.imgSty}
             source={require("../images/icons/pic127.png")}
@@ -78,7 +78,16 @@ export default function Home() {
           renderItem={({ item }) => (
             <Pressable
               onPress={() => {
-                item.id == 6 ? alert("xem them") : alert("khac")
+                if(item.id == 6){
+                  naviHome.navigate('More')
+                }
+                else if(item.id == 3){
+                  naviHome.navigate('HealthFacilities')
+                }
+                else{
+                  alert("khac")
+                }
+                
               }}
             >
               <View style={styles.item_container}>

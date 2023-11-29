@@ -12,11 +12,17 @@ import { useNavigation } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
 
 const InfoUser = () => {
+  const naviIn = useNavigation();
   const [users, setUsers] = useState([])
   const [userId, setUserId] = useState("")
   const [name, setName] = useState("")
-  const [name1, setName1] = useState("")
+  const [birthDay, setBirthDay] = useState("")
+  const [id, setId] = useState("")
+  const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
+  const [gender, setGender] = useState("")
+  const [address, setAddress] = useState("")
+
   const [qrCode, setQrCode] = useState(
     "https://653f4af99e8bd3be29e02de4.mockapi.io/user"
   )
@@ -36,21 +42,26 @@ const InfoUser = () => {
             setName(element.userName)
             setPhone(element.phone)
             setUserId(element.userId)
+            setBirthDay(element.birthDay)
+            setId(element.id)
+            setEmail(element.email)
+            setGender(element.gender)
+            setAddress(element.address)
           }
         })
       })
       .catch((e) => console.log(e))
     setLoading(false)
   }
-  const ResetName = (name) => {
+  const ResetName = (name, birthDay, gender, id, email, address) => {
     users.forEach((element) => {
       if (element.userId === userId) {
-        editName(userId, name)
+        editName(userId, name, birthDay, gender, id, email, address)
         alert("Lưu thông tin thành công!")
       }
     })
   }
-  const editName = (userId, name) => {
+  const editName = (userId, name, birthDay, gender, id, email, address) => {
     fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user/" + `/${userId}`, {
       method: "PUT",
       headers: {
@@ -58,7 +69,13 @@ const InfoUser = () => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        userName: name,
+        'userName': name,
+        'birthDay': birthDay,
+        'gender': gender,
+        'id': id,
+        'email': email,
+        'address': address,
+
       }),
     })
       .then((res) => res.json())
@@ -72,6 +89,13 @@ const InfoUser = () => {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
+        <Pressable onPress={()=>{
+            naviIn.navigate('Tab_bottom')
+          }}>
+          <View style={styles.title1} >
+            <Icon name="arrow-back-outline" size={28} color={"#FFFFFF"} />
+          </View>
+        </Pressable>
         <Text style={styles.text1}>Chỉnh sửa thông tin cá nhân</Text>
       </View>
       <View style={styles.container2}>
@@ -87,12 +111,11 @@ const InfoUser = () => {
             <Text style={{ color: "red" }}> *</Text>
           </Text>
           <TextInput
-            value={name1}
+            value={name}
             onChangeText={(text) => {
-              setName1(text)
+              setName(text)
             }}
             style={styles.input}
-            placeholder={name}
           />
         </View>
         <View style={styles.form_control}>
@@ -101,31 +124,54 @@ const InfoUser = () => {
             <Text style={{ color: "red" }}>*</Text>
           </Text>
 
-          <TextInput style={styles.input} placeholder="01/01/2000" />
+          <TextInput style={styles.input} value={birthDay} onChangeText={(text) => {
+            setBirthDay(text)
+          }} />
+        </View>
+        <View style={styles.form_control}>
+          <Text style={styles.label}>
+            Giới tính
+            <Text style={{ color: "red" }}>*</Text>
+          </Text>
+          <TextInput style={styles.input} value={gender} onChangeText={(text) => {
+            setGender(text)
+          }}/>
+
         </View>
         <View style={styles.form_control}>
           <Text style={styles.label}>
             Số điện thoại
             <Text style={{ color: "red" }}>*</Text>
           </Text>
-          <TextInput style={styles.input} placeholder={phone} />
+          <TextInput style={styles.input} value={phone} editable={false} />
         </View>
         <View style={styles.form_control}>
           <Text style={styles.label}>
             Số hộ chiếu/CMND/CCCD
             <Text style={{ color: "red" }}>*</Text>
           </Text>
-          <TextInput style={styles.input} placeholder="0123456789" />
+          <TextInput style={styles.input} value={id} onChangeText={(text) => {
+            setId(text)
+          }}/>
         </View>
         <View style={styles.form_control}>
           <Text style={styles.label}>Email</Text>
-          <TextInput style={styles.input} placeholder="Email" />
+          <TextInput style={styles.input} value={email} onChangeText={(text) => {
+            setEmail(text)
+          }}/>
+        </View>
+
+        <View style={styles.form_control}>
+          <Text style={styles.label}>Địa chỉ</Text>
+          <TextInput style={styles.input} value={address} onChangeText={(text) => {
+            setAddress(text)
+          }}/>
         </View>
         <Pressable
           onPress={() => {
-            if (name1 === "") {
-              alert("Vui lòng nhập họ và tên!")
-            } else ResetName(name1)
+            if (name === "" || birthDay === "" || gender === "" || id === "" || email === "" || address === "") {
+              alert("Vui lòng nhập đầy đủ họ tên!")
+            } else ResetName(name, birthDay, gender, id, email, address)
           }}
           style={styles.btn}
         >
@@ -146,6 +192,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container1: {
+    flexDirection: 'row',
     // backgroundColor: "#B9DDFF",
     alignItems: "center",
     justifyContent: "center",
@@ -217,5 +264,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "regular",
     color: "#FFFFFF",
+  },
+  title1: {
+    // backgroundColor: "#FFD6D6",
+    width: "10%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })

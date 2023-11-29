@@ -4,7 +4,9 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import Custominput from '../Components/CustomInput.js';
 import CustomButton from '../Components/CustomButton.js';
 import ModalOTP from './ModalOTP.js';
+import { useNavigation } from '@react-navigation/native';
 function Screen_forgot_pass() {
+  const naviFor = useNavigation();
   const [phone, setPhone] = useState('');
   const [pwd, setpwd] = useState('');
   const [conPwd, setConPwd] = useState('');
@@ -18,13 +20,19 @@ function Screen_forgot_pass() {
       if (element.phone === phone) {
         setVisible(true);
       }
+      else{
+        alert("Số điện thoại chưa được đăng ký")
+      }
     });
   }
   const ResetPass = (pass) => {
     users.forEach(element => {
       if (element.phone === phone) {
         editPass(element.userId, pass)
+        setVisible(false)
+        naviFor.navigate("Login")
       }
+
     });
   }
 
@@ -84,6 +92,9 @@ function Screen_forgot_pass() {
             if (pwd === conPwd) {
               ResetPass(pwd)
             }
+            else{
+              alert("Vui lòng nhập xác nhận mật khẩu trùng với mật khẩu")
+            }
           }}
           cancelable
         >
@@ -92,9 +103,9 @@ function Screen_forgot_pass() {
           </View>
           
           <Text style={styles.Text_Style}>Mật khẩu mới</Text>
-          <Custominput placeholder='Nhập nội dung' value={pwd} setValue={(pwd) => { setpwd(pwd) }} />
+          <Custominput placeholder='Nhập nội dung' secureTextEntry value={pwd} setValue={(pwd) => { setpwd(pwd) }} />
           <Text style={styles.Text_Style}>Xác nhận mật khẩu</Text>
-          <Custominput placeholder='Nhập nội dung' value={conPwd} setValue={(conPwd) => { setConPwd(conPwd) }} />
+          <Custominput placeholder='Nhập nội dung' secureTextEntry value={conPwd} setValue={(conPwd) => { setConPwd(conPwd) }} />
 
 
         </ModalOTP>

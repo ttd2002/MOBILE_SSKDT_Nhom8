@@ -7,11 +7,19 @@ import {
   TextInput,
 } from "react-native"
 import React from "react"
+import { useNavigation } from "@react-navigation/native"
+import Icon from "react-native-vector-icons/Ionicons"
 
 const HealthFacilities = () => {
+  const naviHe = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.view1}>
+        <Pressable onPress={() => { naviHe.navigate("Home") }}>
+          <View style={styles.title1}>
+            <Icon name="arrow-back-outline" size={28} color={"#FFFFFF"} />
+          </View>
+        </Pressable>
         <Text style={styles.text1}>Cơ sở y tế</Text>
       </View>
       <View style={styles.view2}>
@@ -53,6 +61,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   view1: {
+    flexDirection: 'row',
     // backgroundColor: "#B9DDFF",
     alignItems: "center",
     justifyContent: "center",
@@ -70,6 +79,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#FFFFFF",
+  },
+  title1: {
+    // backgroundColor: "#FFD6D6",
+    width: "10%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })
 

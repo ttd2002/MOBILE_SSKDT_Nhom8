@@ -21,16 +21,58 @@ function Screen_Register() {
 
     const [verificationId, setVertificationId] = useState(null);
     const recaptchaVerifier = useRef(null);
+    const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false)
 
+    useEffect(() => {
+        getUsers()
+    }, [])
+
+    const getUsers = async () => {
+        setLoading(true)
+        await fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user")
+            .then((res) => res.json())
+            .then((res) => {
+                setUsers(res)
+                console.log(users)
+            })
+            .catch((e) => console.log(e))
+        setLoading(false)
+    }
     const sendVerification = () => {
-        const phoneProvider = new firebase.auth.PhoneAuthProvider();
-        phoneProvider
-            .verifyPhoneNumber('+84 '+phone.substring(1), recaptchaVerifier.current)
-            .then(setVertificationId);
-        setCheck(true)
-        if (check) {
-            setVisible(true)
+        if (phone === '' || fullName === '' || password === '') {
+            alert("Vui lòng nhập đầy đủ thông tin")
         }
+        else {
+            var checkExist = false;
+            var checkNonExist = false;
+
+            users.forEach(element => {
+                if (element.phone === phone) {
+                    checkExist = true;
+                }
+                else {
+                    checkNonExist = true;
+                }
+            });
+            if (checkExist && checkNonExist) {
+                alert("Số điện thoại này đã được đăng ký!")
+            }
+            else {
+                const phoneProvider = new firebase.auth.PhoneAuthProvider();
+                phoneProvider
+                    .verifyPhoneNumber('+84 ' + phone.substring(1), recaptchaVerifier.current)
+                    .then(setVertificationId)
+                    .catch((error) => {
+                        alert("Định dạng mật khẩu không đúng")
+                    });
+                setCheck(true)
+                if (check) {
+                    setVisible(true)
+                }
+            }
+        }
+
 
     }
 
@@ -63,7 +105,11 @@ function Screen_Register() {
                 "userName": name,
                 "password": pwd,
                 "login": false,
-
+                "id": '',
+                "birthDay": '',
+                "email": '',
+                "address":'',
+                "gender": '',
                 "qrCode": "https://653f4af99e8bd3be29e02de4.mockapi.io/user/",
             })
         }).then((res) => res.json())

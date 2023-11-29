@@ -97,7 +97,7 @@ const Personal = () => {
       </View>
 
       <View style={styles.more}>
-        <Pressable style={styles.btn}>
+        <Pressable style={styles.btn} onPress={()=>{naviPer.navigate("InfoUser")}}>
           <Icon name="person" size={23} color={"#5D5D5D"} />
           <Text style={styles.text3}>Thông tin cá nhân</Text>
         </Pressable>

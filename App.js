@@ -21,18 +21,7 @@ const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    //<Screen_login/>
-    //<Screen_forgot_pass/>
-    //<Screen_Register/>
-    // <Home />
-    // <Schedule />
-    // <Notify />
-    // <Cetification />
-    // <Certification01 />
-    // <HealthFacilities />
-    // <Personal />
-    // <InfoUser />
-    // <More />
+    
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
@@ -52,8 +41,11 @@ export default function App() {
         <Stack.Screen name="Login" component={Screen_login} />
         <Stack.Screen name="Forgot_password" component={Screen_forgot_pass} />
         <Stack.Screen name="Register" component={Screen_Register} />
-        <Stack.Screen name="Certification" component={Cetification} />
-        <Stack.Screen name="InfoUser" component={InfoUser} />
+        <Stack.Screen name="Certification" component={Cetification} options={{headerShown: false}} />
+        <Stack.Screen name="InfoUser" component={InfoUser} options={{headerShown: false}}/>
+        <Stack.Screen name="HealthFacilities" component={HealthFacilities} options={{headerShown: false}}/>
+        <Stack.Screen name="More" component={More} options={{headerShown: false}}/>
+
         <Stack.Screen
           options={{ headerShown: false }}
           name="Tab_bottom"

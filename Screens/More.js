@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
 
 const More = () => {
+  const naviMo = useNavigation();
   const [listdata, setListdata] = useState([])
   const mergeData = (list) => {
     setListdata(List.concat(list))
@@ -25,6 +26,11 @@ const More = () => {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
+        <Pressable onPress={() => { naviMo.navigate("Home") }}>
+          <View style={styles.title1}>
+            <Icon name="arrow-back-outline" size={28} color={"#FFFFFF"} />
+          </View>
+        </Pressable>
         <Text style={styles.text1}>Dịch vụ khác</Text>
       </View>
       <View style={styles.container2}>
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   container1: {
+    flexDirection: 'row',
     // backgroundColor: "#9CCFFF",
     alignItems: "center",
     justifyContent: "center",
@@ -137,6 +144,13 @@ const styles = StyleSheet.create({
   text_item: {
     textAlign: "center",
     maxWidth: 80,
+  },
+  title1: {
+    // backgroundColor: "#FFD6D6",
+    width: "10%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })
 
