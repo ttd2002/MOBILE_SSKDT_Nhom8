@@ -14,16 +14,18 @@ function Screen_forgot_pass() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-
   const onPressContinue = () => {
+    var check = false;
     users.forEach(element => {
       if (element.phone === phone) {
         setVisible(true);
+        check = true;
       }
-      else{
-        alert("Số điện thoại chưa được đăng ký")
-      }
+      
     });
+    if(!check){
+      alert('Số điện thoại chưa được đăng ký')
+    }
   }
   const ResetPass = (pass) => {
     users.forEach(element => {

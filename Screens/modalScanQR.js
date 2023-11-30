@@ -14,13 +14,13 @@ const ModalScanQR = ({ onSubmit, visible = false, submitText = "Đóng", url }) 
         }).then((res) => res.json())
         .then(res => {
             setName(res.userName)
-            res.gender === '' ? setGender('---') : setGender(res.gender)
-            res.id === '' ? setId('-------------') : setId(res.id)
-            res.birthDay === '' ? setBirthYear('----') : setBirthYear(res.birthDay)
-            res.address === '' ? setAddress('-------') : setAddress(res.address)
+            res.gender == '' ? setGender('---') : setGender(res.gender)
+            res.id == '' ? setId('-------------') : setId(res.id)
+            res.birthDay == '' ? setBirthYear('----') : setBirthYear(res.birthDay.substring(6))
+            res.address == '' ? setAddress('-------') : setAddress(res.address)
 
         })
-      }, [])
+      }, [url])
     
     return (
         <Modal
@@ -32,7 +32,7 @@ const ModalScanQR = ({ onSubmit, visible = false, submitText = "Đóng", url }) 
                 <View style={{ height: 400, width: 300, justifyContent: 'center', alignItems: 'center' }}>
 
                     <View style={{ flex: 1, width: '90%', height: 500, backgroundColor: '#fff', borderWidth: 1, borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center', height: 80, borderBottomWidth: 1, width: '100%' }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', height: 80, borderBottomWidth: 1, width: '100%', borderBottomColor: '#eeeeee' }}>
                             <Text>Thông tin</Text>
                         </View>
                         <View style={{ marginTop: 20, width: '80%', height: 200, borderRadius: 15, backgroundColor: '#007d49', justifyContent: 'center', alignItems: 'center' }}>
@@ -53,7 +53,10 @@ const ModalScanQR = ({ onSubmit, visible = false, submitText = "Đóng", url }) 
 
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Pressable style={{ padding: 10, backgroundColor: '#2b83f9', justifyContent: 'center', alignItems: 'center', width: 100, borderRadius: 20, marginTop: 50 }} onPress={onSubmit}>
+                            <Pressable style={{ padding: 10, backgroundColor: '#2b83f9', justifyContent: 'center', alignItems: 'center', width: 100, borderRadius: 20, marginTop: 50 }} 
+                            onPress={
+                                onSubmit
+                            }>
                                 <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}> {submitText}</Text>
                             </Pressable>
                         </View>

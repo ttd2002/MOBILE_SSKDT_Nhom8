@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import QRCode from "react-native-qrcode-svg"
 import { useNavigation } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
+import ModalLogout from "./ModalLogout"
 const Personal = () => {
   const naviPer = useNavigation()
   const [users, setUsers] = useState([])
@@ -12,6 +13,8 @@ const Personal = () => {
     "https://653f4af99e8bd3be29e02de4.mockapi.io/user"
   )
   const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     getUser()
   }, [qrCode])
@@ -82,7 +85,7 @@ const Personal = () => {
             <Text style={styles.text2}>{phone}</Text>
           </View>
         </View>
-        <Pressable style={styles.logout} onPress={onPressLogout}>
+        <Pressable style={styles.logout} onPress={()=>{setVisible(true)}}>
           <Image
             style={{ width: 25, height: 30 }}
             source={require("../images/exit.png")}
@@ -97,7 +100,7 @@ const Personal = () => {
       </View>
 
       <View style={styles.more}>
-        <Pressable style={styles.btn} onPress={()=>{naviPer.navigate("InfoUser")}}>
+        <Pressable style={styles.btn} onPress={() => { naviPer.navigate("InfoUser") }}>
           <Icon name="person" size={23} color={"#5D5D5D"} />
           <Text style={styles.text3}>Thông tin cá nhân</Text>
         </Pressable>
@@ -125,10 +128,22 @@ const Personal = () => {
           <Icon name="settings" size={23} color={"#5D5D5D"} />
           <Text style={styles.text3}>Cài đặt</Text>
         </Pressable>
-        <Pressable style={styles.btn} onPress={onPressLogout}>
+        <Pressable style={styles.btn} onPress={()=>{setVisible(true)}}>
           <Icon name="exit" size={23} color={"#5D5D5D"} />
           <Text style={styles.text3}>Đăng xuất</Text>
         </Pressable>
+        <ModalLogout
+          visible={visible}
+          onDismiss={() => setVisible(false)}
+          onSubmit={onPressLogout}
+          cancelable>
+          <View style={{ justifyContent: 'center', alignItems: 'center', height: 30, borderBottomWidth: 1, width: '100%', borderBottomColor: '#eeeeee' }}>
+            <Text>Đăng xuất</Text>
+          </View>
+          <View  style={{ justifyContent: 'center', alignItems: 'center', height: 50, width: '100%' }}>
+            <Text style={{fontSize: 15}}>Bạn thật sự muốn đăng xuất tài khoản?</Text>
+          </View>
+        </ModalLogout>
       </View>
     </View>
   )
