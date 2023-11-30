@@ -42,6 +42,7 @@ const Personal = () => {
         editLoginStatus(element.userId)
       }
     })
+    setVisible(false)
     naviPer.navigate("Login")
   }
   const getUsers = async () => {
@@ -116,7 +117,7 @@ const Personal = () => {
           <Icon name="time" size={23} color={"#5D5D5D"} />
           <Text style={styles.text3}>Lịch sử đặt khám</Text>
         </Pressable>
-        <Pressable style={styles.btn}>
+        <Pressable style={styles.btn} onPress={() => { naviPer.navigate("Passpore") }}>
           <Icon name="book" size={23} color={"#5D5D5D"} />
           <Text style={styles.text3}>Hộ chiếu vắc-xin</Text>
         </Pressable>

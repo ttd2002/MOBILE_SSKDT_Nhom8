@@ -14,21 +14,27 @@ export default function Home() {
   const naviHome = useNavigation()
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
+  const [qrCode, setQrCode] = useState(
+    "https://653f4af99e8bd3be29e02de4.mockapi.io/user"
+  )
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     getUsers()
-  }, [name])
+  }, [qrCode])
   const getUsers = async () => {
     setLoading(true)
     await fetch("https://653f4af99e8bd3be29e02de4.mockapi.io/user")
       .then((res) => res.json())
       .then((res) => {
         setUsers(res)
+        console.log(name)
         res.forEach((element) => {
+          
           if (element.login) {
             setName(element.userName)
           }
         })
+        setQrCode('')
       })
       .catch((e) => console.log(e))
     setLoading(false)
@@ -45,7 +51,7 @@ export default function Home() {
         </View>
       </View>
       <View style={styles.btnArea}>
-        <Pressable style={styles.btn1}>
+        <Pressable style={styles.btn1}  onPress={()=>{naviHome.navigate('Declare')}}>
           <Image
             style={styles.imgSty}
             source={require("../images/icons/pic115.png")}
@@ -61,7 +67,7 @@ export default function Home() {
           <Text style={styles.text_btn}>Chứng nhận</Text>
           <Text style={styles.text_btn}>ngừa Covid</Text>
         </Pressable>
-        <Pressable style={styles.btn3}>
+        <Pressable style={styles.btn3} onPress={()=>{alert("Không có dữ liệu")}}>
           <Image
             style={styles.imgSty}
             source={require("../images/icons/pic129.png")}
@@ -81,8 +87,20 @@ export default function Home() {
                 if(item.id == 6){
                   naviHome.navigate('More')
                 }
+                else if(item.id == 5){
+                  naviHome.navigate('Advise')
+                }
+                else if(item.id == 4){
+                  naviHome.navigate('DocHealth')
+                }
                 else if(item.id == 3){
                   naviHome.navigate('HealthFacilities')
+                }
+                else if(item.id == 2){
+                  naviHome.navigate('ResVacxin')
+                }
+                else if(item.id == 1){
+                  naviHome.navigate('Passpore')
                 }
                 else{
                   alert("khac")
@@ -104,7 +122,7 @@ export default function Home() {
           <Text style={{ fontWeight: "bold", fontSize: 20, color: "#353b42" }}>
             Cẩm nang y tế
           </Text>
-          <Pressable>
+          <Pressable onPress={()=>{naviHome.navigate('HandBook')}}>
             <Text style={{ color: "#5e83d4" }}>Tất cả</Text>
           </Pressable>
         </View>

@@ -47,9 +47,28 @@ const More = () => {
             columnWrapperStyle={{ gap: 10, marginTop: 10 }}
             renderItem={({ item }) => (
               <Pressable
-                onPress={() => {
-                  item.id == 6 ? alert("xem them") : alert("khac")
-                }}
+              onPress={() => {
+                if(item.id == 6){
+                  naviMo.navigate('More')
+                }
+                else if(item.id == 5){
+                  naviMo.navigate('Advise')
+                }
+                else if(item.id == 4){
+                  naviMo.navigate('DocHealth')
+                }
+                else if(item.id == 3){  
+                  naviMo.navigate('ResVacxin')
+                }
+                
+                else if(item.id == 1){
+                  naviMo.navigate('Passpore')
+                }
+                else{
+                  alert("khac")
+                }
+                
+              }}
               >
                 <View style={styles.item_container}>
                   <Image style={styles.btn_img} source={{ uri: item.img }} />

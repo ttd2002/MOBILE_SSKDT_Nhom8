@@ -8,6 +8,8 @@ const Certification = () => {
   const [users, setUsers] = useState([])
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+  const [birthDay, setBirthDay] = useState("")
+
   const [qrCode, setQrCode] = useState(
     "https://653f4af99e8bd3be29e02de4.mockapi.io/user"
   )
@@ -26,6 +28,7 @@ const Certification = () => {
             setQrCode(element.qrCode)
             setName(element.userName)
             setPhone(element.phone)
+            setBirthDay(element.birthDay)
           }
         })
       })
@@ -36,7 +39,7 @@ const Certification = () => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Pressable onPress={()=>{naviCer.navigate("Home")}}>
+        <Pressable onPress={()=>{naviCer.navigate("Tab_bottom")}}>
           <View style={styles.title1}>
             <Icon name="arrow-back-outline" size={28} color={"#FFFFFF"} />
           </View>
@@ -73,7 +76,7 @@ const Certification = () => {
             <Icon name="calendar-outline" size={23} color={"#5D5D5D"} />
             <View>
               <Text style={styles.text4}>Ngày sinh:</Text>
-              <Text style={styles.text3}>01/01/2000</Text>
+              <Text style={styles.text3}>{birthDay}</Text>
             </View>
           </View>
           <View style={styles.info1}>

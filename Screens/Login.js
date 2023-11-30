@@ -17,7 +17,9 @@ function Screen_login() {
   const [password, setPassword] = useState("")
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
-
+  const [qrCode, setQrCode] = useState(
+    "https://653f4af99e8bd3be29e02de4.mockapi.io/user"
+  )
   const onPressForgot = () => {
     navigation.navigate("Forgot_password")
   }
@@ -61,7 +63,7 @@ function Screen_login() {
   }
   useEffect(() => {
     getUsers()
-  }, [])
+  }, [qrCode])
 
   const getUsers = async () => {
     setLoading(true)
@@ -69,6 +71,7 @@ function Screen_login() {
       .then((res) => res.json())
       .then((res) => {
         setUsers(res)
+        setQrCode('')
         console.log(users)
       })
       .catch((e) => console.log(e))

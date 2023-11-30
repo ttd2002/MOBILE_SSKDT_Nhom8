@@ -16,6 +16,12 @@ import Cetification from "./Screens/Certification"
 import HealthFacilities from "./Screens/HealthFacilities"
 import InfoUser from "./Screens/InfoUser"
 import More from "./Screens/More"
+import Declare from "./Screens/Declare"
+import Passpore from "./Screens/Passpore"
+import ResVacxin from "./Screens/ResVacxin"
+import DocHealth from "./Screens/DocHealth"
+import Advise from "./Screens/Advise"
+import HandBook from "./Screens/HandBook"
 
 const Stack = createStackNavigator()
 
@@ -45,6 +51,12 @@ export default function App() {
         <Stack.Screen name="InfoUser" component={InfoUser} options={{headerShown: false}}/>
         <Stack.Screen name="HealthFacilities" component={HealthFacilities} options={{headerShown: false}}/>
         <Stack.Screen name="More" component={More} options={{headerShown: false}}/>
+        <Stack.Screen name="Declare" component={Declare} options={{headerShown: false}}/>
+        <Stack.Screen name="Passpore" component={Passpore} options={{headerShown: false}}/>
+        <Stack.Screen name="ResVacxin" component={ResVacxin} options={{headerShown: false}}/>
+        <Stack.Screen name="DocHealth" component={DocHealth} options={{headerShown: false}}/>
+        <Stack.Screen name="Advise" component={Advise} options={{headerShown: false}}/>
+        <Stack.Screen name="HandBook" component={HandBook} options={{headerShown: false}}/>
 
         <Stack.Screen
           options={{ headerShown: false }}
